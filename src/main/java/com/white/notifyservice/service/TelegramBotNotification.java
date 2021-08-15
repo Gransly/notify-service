@@ -11,6 +11,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.ws.rs.HttpMethod;
+
 @Slf4j
 @Service
 public class TelegramBotNotification implements Notification {
@@ -75,6 +77,7 @@ public class TelegramBotNotification implements Notification {
                                                 .queryParam("chat_id", TELEGRAM_BOT_CHAT_ID)
                                                 .queryParam("text", message)
                                                 .buildAndExpand(TELEGRAM_BOT_TOKEN);
+
 
         webClient.post().uri(uri.toUri()).retrieve().bodyToMono(Void.class).block();
     }
